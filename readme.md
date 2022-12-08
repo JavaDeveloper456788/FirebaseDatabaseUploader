@@ -3,7 +3,7 @@
 ## Prerequisites
 1. Install Python3 https://www.python.org/downloads/release/python-3106/
 
-2. Run install.bat (for Windows) or install.sh (if you are on Linux/Mac) as Admin.
+2. Run install.bat (for Windows) or ./install.sh (if you are on Linux/Mac) as Admin.
 
 ## Usage
 Make  sure you generate service account creds from the Firebase console, rename it to "firebase.json" and put it in the "config" folder.
