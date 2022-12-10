@@ -17,4 +17,4 @@ If you are on Linux or Mac just open the terminal. cd to the directory and run t
 
 All of the functionality of the app is self explaimentory. Just run the app everything else is automated. 
 
-You will need to run the "run_cache_checker.bat" to upload the data cached for usage limit. You can also set up this bat file to run every 24 hour to automatically upload any data cached if needed. Please refer to your OS instruction for the details.
+You will need to run the run_cache_checker.bat on Windows,  ./run_cache_checker.sh on Linux  to upload the data cached for usage limit. You can also set up this bat file to run every 24 hour to automatically upload any data cached if needed. Please refer to your OS instruction for the details.
