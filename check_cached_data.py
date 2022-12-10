@@ -1,18 +1,31 @@
-from bdb import effective
-from sre_parse import GLOBAL_FLAGS
-from this import d
+import os
 import time
-import weakref
 from caching import Caching
-from parser import Parser
+from parser_1 import Parser
+import firebase_admin
+from firebase_admin import credentials
 
 def main():
-    count = Caching.checkIfCachingExist()
-    if count > 0:
-        print("Cached data found, upload process of cached data will start in 10 sec")
-        time.sleep(10)
-        Parser.parseCached("data.csv", count)
-        exit()
+    try:
+        cred = credentials.Certificate("config/firebase.json")
+        firebase_admin.initialize_app(cred)
+    except:
+        print('Please put the creds in the config folder and rename it to "firebas.json"')
+
+    files = [f for f in os.listdir("csv/") if os.path.isfile(os.path.join("csv/", f))]
+
+    csv_files = []
+
+    for f in files:
+        if f.endswith("csv"):
+            csv_files.append(f)
+    
+    for f in csv_files:
+        count = Caching.checkIfCachingExist(f)    
+        if count != -1:
+            print("Cached data found in {}, upload process of cached data will start in 10 sec".format(f))
+            time.sleep(10)
+            Parser.parseCached("csv/"+f, count)
 
 if __name__=="__main__":
     main()

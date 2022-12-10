@@ -1,5 +1,5 @@
 from utils import log
-from parser import Parser
+from parser_1 import Parser
 from validator import Validator
 from compare import Compare
 import shutil
@@ -16,15 +16,21 @@ def main():
         print('Please put the creds in the config folder and rename it to "firebas.json"')
     files = [f for f in listdir("csv/") if os.path.isfile(os.path.join("csv/", f))]
 
-    if(len(files) == 0):
+    csv_files = []
+
+    for f in files:
+        if f.endswith("csv"):
+            csv_files.append(f)
+
+    if(len(csv_files) == 0):
         print("No CSV Files found. Please put the CSV Files in the csv folder")
 
-    for file in files:
+    for file in csv_files:
         if not Validator.validate("csv/{}".format(file)):
             print("{} is corrupted, exiting...".format(file))
             exit()
     
-    for file in files:
+    for file in csv_files:
         path = "csv/{}".format(file)
         old_path = "local/" + file.replace(".csv", ".old")
         entry_name = file.split('.')[0].replace(' ', '')

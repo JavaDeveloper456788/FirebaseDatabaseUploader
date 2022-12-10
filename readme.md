@@ -16,3 +16,5 @@ If you are on windows, just go to the folder where you cloned the repo. Double c
 If you are on Linux or Mac just open the terminal. cd to the directory and run the command ``python3 app.py``
 
 All of the functionality of the app is self explaimentory. Just run the app everything else is automated. 
+
+You will need to run the "run_cache_checker.bat" to upload the data cached for usage limit. You can also set up this bat file to run every 24 hour to automatically upload any data cached if needed. Please refer to your OS instruction for the details.
