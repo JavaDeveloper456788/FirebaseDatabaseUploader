@@ -24,24 +24,29 @@ def main():
 
     if(len(csv_files) == 0):
         print("No CSV Files found. Please put the CSV Files in the csv folder")
+    
+    validated_csv_files = []
 
     for file in csv_files:
-        if not Validator.validate("csv/{}".format(file)):
-            print("{} is corrupted, exiting...".format(file))
-            exit()
+        if Validator.isCorrupted("csv/{}".format(file)):
+            print("{} is corrupted, ignoring this file.".format(file))
+        elif Validator.checkDuplicateEntry("csv/{}".format(file)):
+            print("{} ignored".format(file))
+        else:
+            validated_csv_files.append(file)
     
-    for file in csv_files:
+    for file in validated_csv_files:
         path = "csv/{}".format(file)
         old_path = "local/" + file.replace(".csv", ".old")
         entry_name = file.split('.')[0].replace(' ', '')
 
         print(entry_name)
-
+        
         if os.path.exists(old_path):
-            log("parseUpdated")
+            print("parseUpdated")
             Parser.parseUpdated(path, old_path, entry_name)
         else:
-            log("parse")
+            print("parse")
             Parser.parse(path, entry_name)
         
         shutil.copyfile(path, old_path)
